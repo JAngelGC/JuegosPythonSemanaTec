@@ -32,6 +32,15 @@ def move():
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
     else:
+
+        # Adding random movement to the food for each movement of the snake
+        if abs(food.x) != 15*10:
+            food.x = food.x + randrange(-1, 2) * 10
+
+        if abs(food.y) != 15*10:
+            food.y = food.y + randrange(-1, 2) * 10
+
+
         snake.pop(0)
 
     clear()
@@ -39,7 +48,9 @@ def move():
     for body in snake:
         square(body.x, body.y, 9, 'black')
 
+    # Here is where the food is make it
     square(food.x, food.y, 9, 'green')
+
     update()
     ontimer(move, 100)
 
