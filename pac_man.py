@@ -114,14 +114,23 @@ def move():
     for point, course in ghosts:
         if valid(point + course):
             point.move(course)
+
         else:
-            options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
-            ]
-            plan = choice(options)
+
+            diferenciaX = pacman.x - point.x
+            diferenciaY = pacman.y - point.y
+
+            if diferenciaX > diferenciaY:
+                if pacman.x>=0:
+                    plan = vector(5,0)
+                elif pacman.x<0:
+                    plan = vector(-5,0)
+            else:
+                if pacman.y>=0:
+                    plan = vector(0,5)
+                elif pacman.y<0:
+                    plan = vector(0,-5)
+
             course.x = plan.x
             course.y = plan.y
 
@@ -135,7 +144,7 @@ def move():
         if abs(pacman - point) < 20:
             return
 
-    ontimer(move, 100)
+    ontimer(move, 1)
 
 def change(x, y):
     "Change pacman aim if valid."
